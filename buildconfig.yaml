@@ -1,0 +1,19 @@
+apiVersion: build.openshift.io/v1
+kind: BuildConfig
+metadata:
+  name: welcome-app
+spec:
+  source:
+    type: Git
+    git:
+      uri: https://github.com/gugohu/welcome-app.git
+  strategy:
+    type: Docker
+    dockerStrategy:
+      from:
+        kind: ImageStreamTag
+        name: 'python:3.9-slim'
+  output:
+    to:
+      kind: ImageStreamTag
+      name: flask-app:latest
